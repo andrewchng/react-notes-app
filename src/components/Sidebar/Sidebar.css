@@ -2,7 +2,7 @@
     @apply
     h-dvh
     bg-yellow-500
-    overflow-y-scroll
+    overflow-y-auto
 
 }
 

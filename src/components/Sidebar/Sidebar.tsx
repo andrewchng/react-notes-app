@@ -1,8 +1,8 @@
 import "./Sidebar.css"
-import { Note } from "../../App";
+import { note } from "../../App";
 
 type SideBarProps = {
-    notes: Note[];
+    notes: note[];
     setActiveNote: Function
 }
 
@@ -14,7 +14,7 @@ const SideBar = ({ notes, setActiveNote } : SideBarProps) => {
       </div>
       <div className="notes-list">
         {notes.map(note => (
-          <div onClick={setActiveNote(note)} key={note.id} className="note">
+          <div onClick={()=>setActiveNote(note.id)} key={note.id} className="note">
             <h3 className="title">{note.title}</h3>
           </div>
         ))}
