@@ -1,9 +1,7 @@
 .sidebar{
     @apply
     h-dvh
-    bg-yellow-500
     overflow-y-auto
-
 }
 
 .notes-list {
@@ -12,14 +10,13 @@
 
 .note{
     @apply
-    h-12 p-2
-    bg-yellow-300
+    h-14 p-2
     cursor-pointer
-    hover:bg-green-600 hover:text-white 
+    hover:bg-primary-foreground hover:text-white 
 }
 
 .active{
     @apply
-    bg-green-600
+    bg-primary-foreground
     text-white
 }

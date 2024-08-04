@@ -1,0 +1,29 @@
+.editor{
+    @apply bg-background
+    outline-none
+}
+
+.react-mde{
+    @apply border-none
+
+}
+
+.mde-header{
+    @apply border-secondary
+}
+
+.mde-header .mde-tabs button {
+    @apply 
+    text-sm py-2 px-4 rounded-md
+    border-secondary !important
+}
+
+.mde-header ul.mde-header-group li.mde-header-item button{
+    @apply 
+    text-xs  py-2 px-2
+}
+
+.mde-header .svg-icon{
+    @apply
+    text-white
+}

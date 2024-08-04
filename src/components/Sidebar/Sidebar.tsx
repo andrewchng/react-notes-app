@@ -1,5 +1,8 @@
 import "./Sidebar.css";
 import { note } from "../../App";
+import { Button } from "@/components/ui/button"
+import { Trash, Pen } from "lucide-react"
+
 
 type SideBarProps = {
   notes: note[];
@@ -20,8 +23,10 @@ const SideBar = ({
 }: SideBarProps) => {
   return (
     <div className="sidebar">
-      <div className="h-10 bg-blue-300">
-        <button onClick={() => addNote()}>Add</button>
+      <div className="h-14 flex p-2 ">
+        <Button variant="outline" size="icon" className="ml-auto" onClick={() => addNote()}>
+          <Pen className="h-4 w-4"></Pen>
+        </Button>
       </div>
       <div className="notes-list">
         {notes.map((note) => (
@@ -34,7 +39,9 @@ const SideBar = ({
             className={`note flex ${activeNoteId === note.id ? "active" : ""}`}
           >
             <h3 className="title mr-auto">{note.title}</h3>
-            <button onClick={() => deleteNote(note.id)} className="delete-btn "> delete</button>
+            <Button variant="outline" onClick={() => deleteNote(note.id)} size="icon">
+                <Trash className="h-4 w-4" />
+            </Button>
           </div>
         ))}
       </div>

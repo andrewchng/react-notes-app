@@ -3,6 +3,7 @@ import { note } from "../../App";
 import ReactMde from "react-mde";
 import * as Showdown from "showdown";
 import "react-mde/lib/styles/css/react-mde-all.css";
+import "./Editor.css"
 
 type EditorProps = {
   currentNote: note | undefined;
@@ -26,6 +27,7 @@ export default function Editor({ currentNote, updateNote }: EditorProps) {
             minEditorHeight={95.5}
             minPreviewHeight={85.5}
             heightUnits="vh"
+            classes={ {"textArea" : "editor", "toolbar" : "editor"}}
             value={currentNote.body}
             onChange={(value =>{
                 updateNote(value);

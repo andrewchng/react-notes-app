@@ -1,4 +1,7 @@
 .sidebar-container{
-  @apply bg-blue-50
 }
 
+.gutter{
+  @apply
+  bg-secondary
+}
