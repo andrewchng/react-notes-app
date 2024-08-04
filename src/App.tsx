@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
-import SideBar from "./components/sidebar/sidebar";
-import Editor from "./components/editor/editor";
+import SideBar from "./components/sidebar/Sidebar";
+import Editor from "./components/editor/Editor";
 import { nanoid } from "nanoid";
 import Split from "react-split";
 
