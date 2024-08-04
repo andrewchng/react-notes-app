@@ -6,89 +6,90 @@ import { nanoid } from "nanoid";
 import Split from "react-split";
 
 export type note = {
-  body?: string;
+  body: string;
   title: string;
   id: string;
-  // isActive : boolean;
 };
 
 function seedNotes() {
-  const notes: note[] = [
-    { title: "hello", body: "body", id: nanoid() },
-    { title: "hello2", body: "123123", id: nanoid() },
-    { title: "hello3", body: "body", id: nanoid() },
-    { title: "hello4", body: "body", id: nanoid() },
-    { title: "hello", body: "body", id: nanoid() },
-    { title: "hello2", body: "body", id: nanoid() },
-    { title: "hello3", body: "body", id: nanoid() },
-    { title: "hello4", body: "body", id: nanoid() },
-    { title: "hello", body: "body", id: nanoid() },
-    { title: "hello2", body: "body", id: nanoid() },
-    { title: "hello3", body: "body", id: nanoid() },
-    { title: "hello4", body: "body", id: nanoid() },
-    { title: "hello", body: "body", id: nanoid() },
-    { title: "hello2", body: "body", id: nanoid() },
-    { title: "hello3", body: "body", id: nanoid() },
-    { title: "hello4", body: "body", id: nanoid() },
-    { title: "hello", body: "body", id: nanoid() },
-    { title: "hello2", body: "body", id: nanoid() },
-    { title: "hello3", body: "body", id: nanoid() },
-    { title: "hello4", body: "body", id: nanoid() },
-    { title: "hello", body: "body", id: nanoid() },
-    { title: "hello2", body: "body", id: nanoid() },
-    { title: "hello3", body: "body", id: nanoid() },
-    { title: "hello4", body: "body", id: nanoid() },
-    { title: "hello", body: "body", id: nanoid() },
-    { title: "hello2", body: "body", id: nanoid() },
-    { title: "hello3", body: "body", id: nanoid() },
-    { title: "hello4", body: "body", id: nanoid() },
-    { title: "hello", body: "body", id: nanoid() },
-    { title: "hello2", body: "body", id: nanoid() },
-    { title: "hello3", body: "body", id: nanoid() },
-    { title: "hello4", body: "body", id: nanoid() },
-  ];
+  const notes: note[] = [{ title: "hello", body: "hello", id: nanoid() }];
 
   return notes;
 }
 
 function App() {
   const [notes, setNotes] = useState(seedNotes());
-  const [activeNoteId, setActiveNoteId] = useState(notes[0].id);
+  const [activeNoteId, setActiveNoteId] = useState(
+    (notes[0] && notes[0].id) || undefined
+  );
 
-  function setActiveNote(noteId: string) {
-    const note = notes.find((note) => note.id === noteId);
-    if (!note) {
-      console.error(`No note of id ${noteId} found`);
-    }
-    console.log(`node of id ${noteId} set`);
+  const setActiveNote = (noteId: string) => {
+    console.log(`note of id ${noteId} active`);
     setActiveNoteId(noteId);
-  }
+  };
 
   const updateNote = (value: string) => {
+    const title = value.split("\n")[0];
     setNotes((oldNotes) =>
       oldNotes.map((note) =>
-        note.id === activeNoteId ? { ...note, body: value } : note
+        note.id === activeNoteId ? { ...note, body: value, title: title } : note
       )
     );
   };
 
-  function getActiveNote(): note | undefined {
+  const getActiveNote = (): note | undefined => {
     const note = notes.find((note) => note.id === activeNoteId);
     if (!note) {
-      console.error(`No note of id ${activeNoteId} found`);
+      console.warn(`No note of id ${activeNoteId} found`);
+      return undefined;
     }
+
     return note;
-  }
+  };
+
+  const hasEmptyNote = (): boolean => {
+    return notes.some((note) => note.body?.length === 0);
+  };
+
+  const addNote = (): void => {
+    if (hasEmptyNote()) {
+      return;
+    }
+    const id = nanoid();
+    const newNote: note = { body: "", title: "", id: id };
+    setNotes((oldNotes) => oldNotes.concat(newNote));
+    setActiveNote(id);
+    console.log("New Note created");
+  };
+
+  const clearEmptyNote = (): void => {
+    setNotes((oldNotes) => oldNotes.filter((note) => note.body?.length !== 0));
+  };
+
+  const deleteNote = (noteId: string): void => {
+    console.log(`Note ${noteId} deleted`);
+    setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
+  };
 
   return (
     <>
       <div className="">
         <Split className="flex" sizes={[25, 75]} direction="horizontal">
           <div className="sidebar-container">
-            <SideBar setActiveNote={setActiveNote} notes={notes}></SideBar>
+            <SideBar
+              setActiveNote={setActiveNote}
+              clearEmptyNote={clearEmptyNote}
+              addNote={addNote}
+              notes={notes}
+              deleteNote={deleteNote}
+              activeNoteId={activeNoteId}
+            ></SideBar>
           </div>
           <div className="editor-container">
-            <Editor updateNote={updateNote} currentNote={getActiveNote()}></Editor>
+            <Editor
+              updateNote={updateNote}
+              currentNote={getActiveNote()}
+            ></Editor>
           </div>
         </Split>
       </div>

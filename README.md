@@ -1,3 +1,18 @@
+# Features to add 
+- [x] Create Note
+- [x] Delete Note
+- [ ] Data persist in localstorage 
+- [ ] Data persist in firebase 
+- [ ] move active to last item when there is no active
+- [ ] move last touched item to first to top of sidebar
+- [ ] tan router? 
+- [ ] tan form? 
+- [ ] try shadcn?
+- [ ] dark mode
+- [ ] Debouce save
+- [ ] for new note, if noting updated on blur, delete note
+- [ ] shortcuts?
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

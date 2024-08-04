@@ -20,5 +20,6 @@
 
 .active{
     @apply
-    bg-yellow-600
+    bg-green-600
+    text-white
 }

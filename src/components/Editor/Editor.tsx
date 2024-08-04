@@ -23,6 +23,9 @@ export default function Editor({ currentNote, updateNote }: EditorProps) {
       {currentNote && (
         <div className="content">
           <ReactMde
+            minEditorHeight={95.5}
+            minPreviewHeight={85.5}
+            heightUnits="vh"
             value={currentNote.body}
             onChange={(value =>{
                 updateNote(value);
