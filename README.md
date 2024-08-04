@@ -7,8 +7,9 @@
 - [ ] move last touched item to first to top of sidebar
 - [ ] tan router? 
 - [ ] tan form? 
-- [ ] try shadcn?
-- [ ] dark mode
+- [x] try shadcn?
+- [x] dark mode
+- [ ] light mode
 - [ ] Debouce save
 - [ ] for new note, if noting updated on blur, delete note
 - [ ] shortcuts?
