@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
-import SideBar from "./components/Sidebar/Sidebar";
-import Editor from "./components/Editor/Editor";
+import SideBar from "./components/sidebar/sidebar";
+import Editor from "./components/editor/editor";
 import { nanoid } from "nanoid";
 import Split from "react-split";
 
@@ -74,7 +74,12 @@ function App() {
   return (
     <>
       <div className="">
-        <Split className="flex" sizes={[25, 75]} direction="horizontal">
+        <Split
+          className="flex"
+          sizes={[25, 75]}
+          gutterSize={5}
+          direction="horizontal"
+        >
           <div className="sidebar-container">
             <SideBar
               setActiveNote={setActiveNote}
