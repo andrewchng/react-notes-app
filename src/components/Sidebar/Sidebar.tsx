@@ -1,4 +1,4 @@
-import "./Sidebar.css";
+import "./idebar.css";
 import { note } from "../../App";
 import { Button } from "@/components/ui/button"
 import { Trash, Pen } from "lucide-react"
