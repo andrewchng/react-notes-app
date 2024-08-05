@@ -2,6 +2,7 @@ import "./Sidebar.css";
 import { note } from "../../App";
 import { Button } from "@/components/ui/button"
 import { Trash, Pen } from "lucide-react"
+import { ModeToggle } from "../mode-toggle";
 
 
 type SideBarProps = {
@@ -24,6 +25,7 @@ const SideBar = ({
   return (
     <div className="sidebar">
       <div className="h-14 flex p-2 ">
+        <ModeToggle></ModeToggle>
         <Button variant="outline" size="icon" className="ml-auto" onClick={() => addNote()}>
           <Pen className="h-4 w-4"></Pen>
         </Button>
