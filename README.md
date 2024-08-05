@@ -1,7 +1,7 @@
 # Features to add 
 - [x] Create Note
 - [x] Delete Note
-- [ ] Data persist in localstorage 
+- [x] Data persist in localstorage 
 - [ ] Data persist in firebase 
 - [ ] move active to last item when there is no active
 - [ ] move last touched item to first to top of sidebar
@@ -9,7 +9,8 @@
 - [ ] tan form? 
 - [x] try shadcn?
 - [x] dark mode
-- [ ] light mode
+- [x] light mode
+- [ ] toggle dark/light mode button
 - [ ] Debouce save
 - [ ] for new note, if noting updated on blur, delete note
 - [ ] shortcuts?
