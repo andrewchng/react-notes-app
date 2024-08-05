@@ -28,7 +28,7 @@ export default function Editor({ currentNote, updateNote }: EditorProps) {
             maxEditorHeight={95.5}
             minPreviewHeight={85.5}
             heightUnits="vh"
-            classes={ {"textArea" : "editor", "toolbar" : "editor"}}
+            classes={ {"textArea" : "apply-color", "toolbar" : "apply-color"}}
             value={currentNote.body}
             onChange={(value =>{
                 updateNote(value);
