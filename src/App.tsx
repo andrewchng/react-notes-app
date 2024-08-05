@@ -56,7 +56,7 @@ const App = () => {
 
     let strippedTitle = title.split("");
     for (let char of title.split("")) {
-      if (char.match(/^[0-9a-z]+$/)) break;
+      if (char.match(/^[0-9a-zA-Z]+$/)) break;
       strippedTitle.shift();
     }
 
