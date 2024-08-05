@@ -44,7 +44,10 @@ const SideBar = ({
             key={note.id}
             className={`note group ${activeNoteId === note.id ? "active" : ""}`}
           >
-            <span className="title mr-auto">{note.title}</span>
+            <div className="title mr-auto flex-col">
+              <div className="">{note.title}</div>
+              <Timestamp note={note} />
+            </div>
             <Button
               className="hidden group-hover:flex"
               variant="outline"
@@ -58,6 +61,21 @@ const SideBar = ({
       </div>
     </div>
   );
+};
+
+const Timestamp = ({ note }: { note: note }) => {
+  const date = new Date(note.updatedAt);
+  const day = date.getDate();
+  let timestamp = "";
+  if (day !== new Date().getDate()) {
+    timestamp = day + "/" + date.getMonth() + "/" + date.getFullYear();
+  } else {
+    const hours = date.getHours();
+    const am_pm = hours > 12 ? "pm" : "am";
+    const am_pm_hr = hours > 12 ? hours - 12 : hours;
+    timestamp = `${am_pm_hr}:${date.getMinutes()} ${am_pm}`;
+  }
+  return <div className="timestamp text-xs">{timestamp}</div>;
 };
 
 export default SideBar;

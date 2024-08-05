@@ -52,12 +52,23 @@ const App = () => {
   };
 
   const updateNote = (value: string) => {
-    console.log(`note of id ${activeNoteId} updated`);
     const title = value.split("\n")[0];
+
+    let strippedTitle = title.split("");
+    for (let char of title.split("")) {
+      if (char.match(/^[0-9a-z]+$/)) break;
+      strippedTitle.shift();
+    }
+
     setNotes((oldNotes) =>
       oldNotes.map((note) =>
         note.id === activeNoteId
-          ? { ...note, body: value, title: title, updatedAt: Date.now() }
+          ? {
+              ...note,
+              body: value,
+              title: strippedTitle.join(""),
+              updatedAt: Date.now(),
+            }
           : note
       )
     );
@@ -158,9 +169,7 @@ const App = () => {
   );
 };
 
-const LandingPage = ({ addNote }: {
-  addNote: () => void;
-}) => {
+const LandingPage = ({ addNote }: { addNote: () => void }) => {
   return (
     <div className="h-dvh flex gap-3 items-center justify-center">
       <div>Start</div>
