@@ -32,7 +32,7 @@
 
 .mde-preview .mde-preview-content pre{
     @apply 
-    bg-background
+    bg-primary-foreground
 }
 
 .mde-preview {
