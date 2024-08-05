@@ -3,6 +3,7 @@ import { note } from "../../App";
 import { Button } from "@/components/ui/button";
 import { Trash, Pen } from "lucide-react";
 import { ModeToggle } from "../mode-toggle";
+import { useEffect, useRef } from "react";
 
 const Timestamp = ({ note }: { note: note }) => {
   const date = new Date(note.updatedAt);
@@ -15,7 +16,7 @@ const Timestamp = ({ note }: { note: note }) => {
     const am_pm = hours > 12 ? "pm" : "am";
     const am_pm_hr = hours > 12 ? hours - 12 : hours;
     const mins = date.getMinutes();
-    const min_display = mins < 10 ? "0" + mins.toString() : mins
+    const min_display = mins < 10 ? "0" + mins.toString() : mins;
     timestamp = `${am_pm_hr}:${min_display} ${am_pm}`;
   }
   return <div className="timestamp text-xs">{timestamp}</div>;
@@ -38,6 +39,12 @@ const SideBar = ({
   deleteNote,
   addNote,
 }: SideBarProps) => {
+  const scrollableRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    scrollableRef.current?.scrollTo(0, 0);
+  }, [notes]);
+
   return (
     <div className="sidebar overflow-hidden">
       <div className="h-14 flex p-2  ">
@@ -51,7 +58,7 @@ const SideBar = ({
           <Pen className="h-4 w-4"></Pen>
         </Button>
       </div>
-      <div className="notes-list">
+      <div ref={scrollableRef} className="notes-list">
         {notes.map((note) => (
           <div
             onClick={() => {
@@ -79,7 +86,5 @@ const SideBar = ({
     </div>
   );
 };
-
-
 
 export default SideBar;
