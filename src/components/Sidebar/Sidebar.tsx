@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Trash, Pen } from "lucide-react";
 import { ModeToggle } from "../mode-toggle";
 import { useEffect, useRef } from "react";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 const Timestamp = ({ note }: { note: note }) => {
   const date = new Date(note.updatedAt);
@@ -58,31 +59,35 @@ const SideBar = ({
           <Pen className="h-4 w-4"></Pen>
         </Button>
       </div>
-      <div ref={scrollableRef} className="notes-list">
-        {notes.map((note) => (
-          <div
-            onClick={() => {
-              setActiveNote(note.id);
-              clearEmptyNote();
-            }}
-            key={note.id}
-            className={`note group ${activeNoteId === note.id ? "active" : ""}`}
-          >
-            <div className="mr-auto flex-col overflow-hidden">
-              <div className="title">{note.title}</div>
-              <Timestamp note={note} />
-            </div>
-            <Button
-              className="hidden group-hover:flex "
-              variant="ghost"
-              onClick={() => deleteNote(note.id)}
-              size="icon"
+      {/* <ScrollArea className="h-full rounded-md border"> */}
+        <div ref={scrollableRef} className="notes-list">
+          {notes.map((note) => (
+            <div
+              onClick={() => {
+                setActiveNote(note.id);
+                clearEmptyNote();
+              }}
+              key={note.id}
+              className={`note group ${
+                activeNoteId === note.id ? "active" : ""
+              }`}
             >
-              <Trash className="h-4 w-4" />
-            </Button>
-          </div>
-        ))}
-      </div>
+              <div className="mr-auto flex-col overflow-hidden">
+                <div className="title">{note.title}</div>
+                <Timestamp note={note} />
+              </div>
+              <Button
+                className="hidden group-hover:flex "
+                variant="ghost"
+                onClick={() => deleteNote(note.id)}
+                size="icon"
+              >
+                <Trash className="h-4 w-4" />
+              </Button>
+            </div>
+          ))}
+        </div>
+      {/* </ScrollArea> */}
     </div>
   );
 };

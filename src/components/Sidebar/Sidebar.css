@@ -1,35 +1,26 @@
-.sidebar{
-    @apply
-    h-dvh
-    overflow-y-auto
+.sidebar {
+  @apply h-dvh
+    overflow-y-auto;
 }
 
-.notes-list{
-    @apply
-    h-full
-    overflow-y-scroll
+.notes-list {
+  @apply h-full
+    overflow-y-scroll;
 }
 
-.notes-list::-webkit-scrollbar {
-    @apply hidden; /* for Chrome, Safari, and Opera */
-  }
-
-.note{
-    @apply
-    flex
+.note {
+  @apply flex
     h-14 p-2
     cursor-pointer
-    hover:bg-primary-foreground hover:text-foreground
+    hover:bg-primary-foreground hover:text-foreground;
 }
 
-.title{
-    @apply
-    overflow-hidden
+.title {
+  @apply overflow-hidden
     text-ellipsis
-    text-nowrap
+    text-nowrap;
 }
 
-.active{
-    @apply
-    bg-primary-foreground
+.active {
+  @apply bg-primary-foreground;
 }
