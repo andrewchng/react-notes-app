@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Trash, Pen } from "lucide-react";
 import { ModeToggle } from "../mode-toggle";
 import { useEffect, useRef } from "react";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { Separator } from "../ui/separator";
 
 const Timestamp = ({ note }: { note: note }) => {
   const date = new Date(note.updatedAt);
@@ -59,9 +59,9 @@ const SideBar = ({
           <Pen className="h-4 w-4"></Pen>
         </Button>
       </div>
-      {/* <ScrollArea className="h-full rounded-md border"> */}
-        <div ref={scrollableRef} className="notes-list">
-          {notes.map((note) => (
+      <div ref={scrollableRef} className="notes-list">
+        {notes.map((note, i) => (
+          <div className="note-container">
             <div
               onClick={() => {
                 setActiveNote(note.id);
@@ -85,9 +85,10 @@ const SideBar = ({
                 <Trash className="h-4 w-4" />
               </Button>
             </div>
-          ))}
-        </div>
-      {/* </ScrollArea> */}
+            {i < notes.length - 1 && <Separator className="my-1" />}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
