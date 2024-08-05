@@ -9,7 +9,7 @@
     flex
     h-14 p-2
     cursor-pointer
-    hover:bg-primary-foreground hover:text-white 
+    hover:bg-primary-foreground hover:text-foreground
 }
 
 .title{

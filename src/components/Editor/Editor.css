@@ -27,5 +27,5 @@
 
 .mde-header .svg-icon{
     @apply
-    text-white
+    text-foreground
 }
