@@ -15,6 +15,7 @@
 - [x] for new note, if noting updated on blur, delete note
 - [ ] shortcuts?
 - [ ] auth
+- [ ] export selected markdown files
 
 # React + TypeScript + Vite
 
