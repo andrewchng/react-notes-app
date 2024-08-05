@@ -11,6 +11,8 @@ export type note = {
   body: string;
   title: string;
   id: string;
+  createdAt: number;
+  updatedAt: number;
 };
 
 const App = () => {
@@ -24,12 +26,14 @@ const App = () => {
     (notes && notes[0]?.id) || undefined
   );
 
+  const sortedNotes = notes.sort((a, b) => b.updatedAt - a.updatedAt)
+
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
     resetActiveNote();
   }, [notes]);
 
-  const resetActiveNote = () => {
+  const resetActiveNote = (): void => {
     const note = notes.find((note) => note.id === activeNoteId);
     if (!note && notes.length > 0) {
       setActiveNoteId(notes[notes.length - 1].id);
@@ -42,10 +46,13 @@ const App = () => {
   };
 
   const updateNote = (value: string) => {
+    console.log(`note of id ${activeNoteId} updated`);
     const title = value.split("\n")[0];
     setNotes((oldNotes) =>
       oldNotes.map((note) =>
-        note.id === activeNoteId ? { ...note, body: value, title: title } : note
+        note.id === activeNoteId
+          ? { ...note, body: value, title: title, updatedAt: Date.now() }
+          : note
       )
     );
   };
@@ -69,7 +76,13 @@ const App = () => {
       return;
     }
     const id = nanoid();
-    const newNote: note = { body: "", title: "", id: id };
+    const newNote: note = {
+      body: "",
+      title: "",
+      id: id,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    };
     setNotes((oldNotes) => oldNotes.concat(newNote));
     setActiveNote(id);
     console.log("New Note created");
@@ -99,7 +112,7 @@ const App = () => {
                 setActiveNote={setActiveNote}
                 clearEmptyNote={clearEmptyNote}
                 addNote={addNote}
-                notes={notes}
+                notes={sortedNotes}
                 deleteNote={deleteNote}
                 activeNoteId={activeNoteId}
               ></SideBar>
@@ -127,6 +140,6 @@ const App = () => {
       )}
     </>
   );
-}
+};
 
 export default App;
