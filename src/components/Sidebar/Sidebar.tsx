@@ -20,7 +20,7 @@ const Timestamp = ({ note }: { note: note }) => {
     const min_display = mins < 10 ? "0" + mins.toString() : mins;
     timestamp = `${am_pm_hr}:${min_display} ${am_pm}`;
   }
-  return <div className="timestamp text-xs">{timestamp}</div>;
+  return <div className="timestamp text-xs text-slate-500">{timestamp}</div>;
 };
 
 type SideBarProps = {
