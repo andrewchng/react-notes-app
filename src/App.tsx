@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import SideBar from "./components/sidebar/Sidebar";
 import Editor from "./components/editor/Editor";
 import { nanoid } from "nanoid";
 import Split from "react-split";
+import { Button } from "./components/ui/button";
+import { Pen } from "lucide-react";
 
 export type note = {
   body: string;
@@ -11,17 +13,28 @@ export type note = {
   id: string;
 };
 
-function seedNotes() {
-  const notes: note[] = [{ title: "hello", body: "hello", id: nanoid() }];
+const App = () => {
+  const getNotes = (): note[] | undefined => {
+    const notes = localStorage.getItem("notes");
+    return notes ? (JSON.parse(notes) as note[]) : undefined;
+  };
 
-  return notes;
-}
-
-function App() {
-  const [notes, setNotes] = useState(seedNotes());
+  const [notes, setNotes] = useState(getNotes() || []);
   const [activeNoteId, setActiveNoteId] = useState(
-    (notes[0] && notes[0].id) || undefined
+    (notes && notes[0]?.id) || undefined
   );
+
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+    resetActiveNote();
+  }, [notes]);
+
+  const resetActiveNote = () => {
+    const note = notes.find((note) => note.id === activeNoteId);
+    if (!note && notes.length > 0) {
+      setActiveNoteId(notes[notes.length - 1].id);
+    }
+  };
 
   const setActiveNote = (noteId: string) => {
     console.log(`note of id ${noteId} active`);
@@ -73,31 +86,45 @@ function App() {
 
   return (
     <>
-      <div className="">
-        <Split
-          className="flex"
-          sizes={[25, 75]}
-          gutterSize={5}
-          direction="horizontal"
-        >
-          <div className="sidebar-container">
-            <SideBar
-              setActiveNote={setActiveNote}
-              clearEmptyNote={clearEmptyNote}
-              addNote={addNote}
-              notes={notes}
-              deleteNote={deleteNote}
-              activeNoteId={activeNoteId}
-            ></SideBar>
-          </div>
-          <div className="editor-container">
-            <Editor
-              updateNote={updateNote}
-              currentNote={getActiveNote()}
-            ></Editor>
-          </div>
-        </Split>
-      </div>
+      {notes.length > 0 ? (
+        <div className="">
+          <Split
+            className="flex"
+            sizes={[25, 75]}
+            gutterSize={5}
+            direction="horizontal"
+          >
+            <div className="sidebar-container">
+              <SideBar
+                setActiveNote={setActiveNote}
+                clearEmptyNote={clearEmptyNote}
+                addNote={addNote}
+                notes={notes}
+                deleteNote={deleteNote}
+                activeNoteId={activeNoteId}
+              ></SideBar>
+            </div>
+            <div className="editor-container">
+              <Editor
+                updateNote={updateNote}
+                currentNote={getActiveNote()}
+              ></Editor>
+            </div>
+          </Split>
+        </div>
+      ) : (
+        <div>
+          <h1>NO NOTES</h1>
+          <Button
+            variant="outline"
+            size="icon"
+            className="ml-auto"
+            onClick={() => addNote()}
+          >
+            <Pen className="h-4 w-4"></Pen>
+          </Button>
+        </div>
+      )}
     </>
   );
 }
