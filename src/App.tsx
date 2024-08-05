@@ -150,21 +150,29 @@ const App = () => {
             </Split>
           </div>
         ) : (
-          <div>
-            <h1>NO NOTES</h1>
-            <Button
-              variant="outline"
-              size="icon"
-              className="ml-auto"
-              onClick={() => addNote()}
-            >
-              <Pen className="h-4 w-4"></Pen>
-            </Button>
-          </div>
+          <LandingPage addNote={addNote} />
         )}
         <Toaster />
       </ThemeProvider>
     </>
+  );
+};
+
+const LandingPage = ({ addNote }: {
+  addNote: () => void;
+}) => {
+  return (
+    <div className="h-dvh flex gap-3 items-center justify-center">
+      <div>Start</div>
+      <Button
+        variant="outline"
+        size="icon"
+        className=""
+        onClick={() => addNote()}
+      >
+        <Pen className="h-4 w-4"></Pen>
+      </Button>
+    </div>
   );
 };
 

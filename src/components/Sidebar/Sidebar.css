@@ -18,6 +18,7 @@
     overflow-hidden
     text-ellipsis
     w-10/12
+    text-nowrap
 }
 
 .active{
