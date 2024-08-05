@@ -20,10 +20,8 @@
 
 .title{
     @apply
-    content-center
     overflow-hidden
     text-ellipsis
-    w-full
     text-nowrap
 }
 

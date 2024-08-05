@@ -68,8 +68,8 @@ const SideBar = ({
             key={note.id}
             className={`note group ${activeNoteId === note.id ? "active" : ""}`}
           >
-            <div className="title mr-auto flex-col">
-              <div className="">{note.title}</div>
+            <div className="mr-auto flex-col overflow-hidden">
+              <div className="title">{note.title}</div>
               <Timestamp note={note} />
             </div>
             <Button
