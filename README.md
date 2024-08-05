@@ -10,10 +10,11 @@
 - [x] try shadcn?
 - [x] dark mode
 - [x] light mode
-- [ ] toggle dark/light mode button
+- [x] toggle dark/light mode button
 - [ ] Debouce save
 - [x] for new note, if noting updated on blur, delete note
 - [ ] shortcuts?
+- [ ] auth
 
 # React + TypeScript + Vite
 

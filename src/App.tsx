@@ -7,6 +7,9 @@ import Split from "react-split";
 import { Button } from "./components/ui/button";
 import { Pen } from "lucide-react";
 import { ThemeProvider } from "./components/theme.provider";
+import { Toaster } from "./components/ui/toaster";
+import { useToast } from "./components/ui/use-toast";
+import { ToastAction } from "./components/ui/toast";
 
 export type note = {
   body: string;
@@ -17,6 +20,8 @@ export type note = {
 };
 
 const App = () => {
+  const { toast } = useToast();
+
   const getNotes = (): note[] | undefined => {
     const notes = localStorage.getItem("notes");
     return notes ? (JSON.parse(notes) as note[]) : undefined;
@@ -95,7 +100,24 @@ const App = () => {
 
   const deleteNote = (noteId: string): void => {
     console.log(`Note ${noteId} deleted`);
+    const toDelete = notes.find((note) => note.id === noteId);
+    if (!toDelete) return;
     setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
+
+    toast({
+      description: "Note Deleted",
+      action: (
+        <ToastAction
+          onClick={() => {
+            setNotes((oldNotes) => oldNotes.concat(toDelete));
+            console.log("undo!!");
+          }}
+          altText="Undo deletion"
+        >
+          Undo
+        </ToastAction>
+      ),
+    });
   };
 
   return (
@@ -140,6 +162,7 @@ const App = () => {
             </Button>
           </div>
         )}
+        <Toaster />
       </ThemeProvider>
     </>
   );
