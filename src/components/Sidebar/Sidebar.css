@@ -4,19 +4,23 @@
     overflow-y-auto
 }
 
-.notes-list {
-
-}
-
 .note{
     @apply
+    flex
     h-14 p-2
     cursor-pointer
     hover:bg-primary-foreground hover:text-white 
 }
 
+.title{
+    @apply
+    content-center
+    overflow-hidden
+    text-ellipsis
+    w-10/12
+}
+
 .active{
     @apply
     bg-primary-foreground
-    text-white
 }

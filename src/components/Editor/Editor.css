@@ -10,11 +10,13 @@
 
 .mde-header{
     @apply border-secondary
+    p-2
 }
 
 .mde-header .mde-tabs button {
     @apply 
     text-sm py-2 px-4 rounded-md
+    m-0
     border-secondary !important
 }
 

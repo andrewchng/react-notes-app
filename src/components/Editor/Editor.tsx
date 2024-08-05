@@ -3,7 +3,7 @@ import { note } from "../../App";
 import ReactMde from "react-mde";
 import * as Showdown from "showdown";
 import "react-mde/lib/styles/css/react-mde-all.css";
-import "./editor.css"
+import "./Editor.css"
 
 type EditorProps = {
   currentNote: note | undefined;

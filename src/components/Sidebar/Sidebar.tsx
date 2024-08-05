@@ -1,4 +1,4 @@
-import "./sidebar.css";
+import "./Sidebar.css";
 import { note } from "../../App";
 import { Button } from "@/components/ui/button"
 import { Trash, Pen } from "lucide-react"
@@ -36,9 +36,9 @@ const SideBar = ({
               clearEmptyNote()
             }}
             key={note.id}
-            className={`note flex ${activeNoteId === note.id ? "active" : ""}`}
+            className={`note ${activeNoteId === note.id ? "active" : ""}`}
           >
-            <h3 className="title mr-auto">{note.title}</h3>
+            <span className="title mr-auto">{note.title}</span>
             <Button variant="outline" onClick={() => deleteNote(note.id)} size="icon">
                 <Trash className="h-4 w-4" />
             </Button>
