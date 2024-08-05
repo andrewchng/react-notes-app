@@ -36,8 +36,9 @@
 }
 
 .mde-preview {
+    min-height: 93.5vh !important;
+    max-height: 93.5vh !important;
     @apply 
-    max-h-screen
     overflow-scroll
 }
 
