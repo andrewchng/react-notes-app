@@ -13,7 +13,7 @@ const Timestamp = ({ note }: { note: note }) => {
     timestamp = day + "/" + date.getMonth() + "/" + date.getFullYear();
   } else {
     const hours = date.getHours();
-    const am_pm = hours > 12 ? "pm" : "am";
+    const am_pm = hours > 12 ? "PM" : "AM";
     const am_pm_hr = hours > 12 ? hours - 12 : hours;
     const mins = date.getMinutes();
     const min_display = mins < 10 ? "0" + mins.toString() : mins;
@@ -73,8 +73,8 @@ const SideBar = ({
               <Timestamp note={note} />
             </div>
             <Button
-              className="hidden group-hover:flex"
-              variant="outline"
+              className="hidden group-hover:flex "
+              variant="ghost"
               onClick={() => deleteNote(note.id)}
               size="icon"
             >
