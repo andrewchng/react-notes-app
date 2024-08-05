@@ -15,7 +15,7 @@ const Timestamp = ({ note }: { note: note }) => {
   } else {
     const hours = date.getHours();
     const am_pm = hours > 12 ? "PM" : "AM";
-    const am_pm_hr = hours > 12 ? hours - 12 : hours;
+    const am_pm_hr = hours == 0 ? 12 : hours > 12 ? hours - 12 : hours;
     const mins = date.getMinutes();
     const min_display = mins < 10 ? "0" + mins.toString() : mins;
     timestamp = `${am_pm_hr}:${min_display} ${am_pm}`;
