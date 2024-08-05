@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 import Split from "react-split";
 import { Button } from "./components/ui/button";
 import { Pen } from "lucide-react";
+import { ThemeProvider } from "./components/theme.provider";
 
 export type note = {
   body: string;
@@ -26,7 +27,7 @@ const App = () => {
     (notes && notes[0]?.id) || undefined
   );
 
-  const sortedNotes = notes.sort((a, b) => b.updatedAt - a.updatedAt)
+  const sortedNotes = notes.sort((a, b) => b.updatedAt - a.updatedAt);
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
@@ -99,45 +100,47 @@ const App = () => {
 
   return (
     <>
-      {notes.length > 0 ? (
-        <div className="">
-          <Split
-            className="flex"
-            sizes={[25, 75]}
-            gutterSize={5}
-            direction="horizontal"
-          >
-            <div className="sidebar-container">
-              <SideBar
-                setActiveNote={setActiveNote}
-                clearEmptyNote={clearEmptyNote}
-                addNote={addNote}
-                notes={sortedNotes}
-                deleteNote={deleteNote}
-                activeNoteId={activeNoteId}
-              ></SideBar>
-            </div>
-            <div className="editor-container">
-              <Editor
-                updateNote={updateNote}
-                currentNote={getActiveNote()}
-              ></Editor>
-            </div>
-          </Split>
-        </div>
-      ) : (
-        <div>
-          <h1>NO NOTES</h1>
-          <Button
-            variant="outline"
-            size="icon"
-            className="ml-auto"
-            onClick={() => addNote()}
-          >
-            <Pen className="h-4 w-4"></Pen>
-          </Button>
-        </div>
-      )}
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        {notes.length > 0 ? (
+          <div className="">
+            <Split
+              className="flex"
+              sizes={[25, 75]}
+              gutterSize={5}
+              direction="horizontal"
+            >
+              <div className="sidebar-container">
+                <SideBar
+                  setActiveNote={setActiveNote}
+                  clearEmptyNote={clearEmptyNote}
+                  addNote={addNote}
+                  notes={sortedNotes}
+                  deleteNote={deleteNote}
+                  activeNoteId={activeNoteId}
+                ></SideBar>
+              </div>
+              <div className="editor-container">
+                <Editor
+                  updateNote={updateNote}
+                  currentNote={getActiveNote()}
+                ></Editor>
+              </div>
+            </Split>
+          </div>
+        ) : (
+          <div>
+            <h1>NO NOTES</h1>
+            <Button
+              variant="outline"
+              size="icon"
+              className="ml-auto"
+              onClick={() => addNote()}
+            >
+              <Pen className="h-4 w-4"></Pen>
+            </Button>
+          </div>
+        )}
+      </ThemeProvider>
     </>
   );
 };
