@@ -29,3 +29,14 @@
     @apply
     text-foreground
 }
+
+.mde-preview .mde-preview-content pre{
+    @apply 
+    bg-background
+}
+
+.mde-preview {
+    @apply 
+    max-h-screen
+    overflow-scroll
+}

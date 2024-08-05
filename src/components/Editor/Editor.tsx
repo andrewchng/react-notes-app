@@ -25,6 +25,7 @@ export default function Editor({ currentNote, updateNote }: EditorProps) {
         <div className="content">
           <ReactMde
             minEditorHeight={95.5}
+            maxEditorHeight={95.5}
             minPreviewHeight={85.5}
             heightUnits="vh"
             classes={ {"textArea" : "editor", "toolbar" : "editor"}}

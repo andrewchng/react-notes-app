@@ -121,7 +121,6 @@ const App = () => {
         <ToastAction
           onClick={() => {
             setNotes((oldNotes) => oldNotes.concat(toDelete));
-            console.log("undo!!");
           }}
           altText="Undo deletion"
         >
@@ -135,7 +134,7 @@ const App = () => {
     <>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         {notes.length > 0 ? (
-          <div className="">
+          <div>
             <Split
               className="flex"
               sizes={[25, 75]}

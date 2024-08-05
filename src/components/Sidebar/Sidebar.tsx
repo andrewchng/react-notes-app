@@ -4,6 +4,23 @@ import { Button } from "@/components/ui/button";
 import { Trash, Pen } from "lucide-react";
 import { ModeToggle } from "../mode-toggle";
 
+const Timestamp = ({ note }: { note: note }) => {
+  const date = new Date(note.updatedAt);
+  const day = date.getDate();
+  let timestamp = "";
+  if (day !== new Date().getDate()) {
+    timestamp = day + "/" + date.getMonth() + "/" + date.getFullYear();
+  } else {
+    const hours = date.getHours();
+    const am_pm = hours > 12 ? "pm" : "am";
+    const am_pm_hr = hours > 12 ? hours - 12 : hours;
+    const mins = date.getMinutes();
+    const min_display = mins < 10 ? "0" + mins.toString() : mins
+    timestamp = `${am_pm_hr}:${min_display} ${am_pm}`;
+  }
+  return <div className="timestamp text-xs">{timestamp}</div>;
+};
+
 type SideBarProps = {
   notes: note[];
   setActiveNote: Function;
@@ -22,8 +39,8 @@ const SideBar = ({
   addNote,
 }: SideBarProps) => {
   return (
-    <div className="sidebar">
-      <div className="h-14 flex p-2 ">
+    <div className="sidebar overflow-hidden">
+      <div className="h-14 flex p-2  ">
         <ModeToggle></ModeToggle>
         <Button
           variant="outline"
@@ -63,19 +80,6 @@ const SideBar = ({
   );
 };
 
-const Timestamp = ({ note }: { note: note }) => {
-  const date = new Date(note.updatedAt);
-  const day = date.getDate();
-  let timestamp = "";
-  if (day !== new Date().getDate()) {
-    timestamp = day + "/" + date.getMonth() + "/" + date.getFullYear();
-  } else {
-    const hours = date.getHours();
-    const am_pm = hours > 12 ? "pm" : "am";
-    const am_pm_hr = hours > 12 ? hours - 12 : hours;
-    timestamp = `${am_pm_hr}:${date.getMinutes()} ${am_pm}`;
-  }
-  return <div className="timestamp text-xs">{timestamp}</div>;
-};
+
 
 export default SideBar;
